@@ -1,0 +1,31 @@
+html
+  head
+    link(rel="stylesheet", href="../styles/main.css")
+  body
+    page(size='A4')
+      .print-container
+        // header
+        #header
+          .text-box.center-box
+            h1 Texto en el costado izquierdo
+            p Texto en el costado izquierdo
+          .text-box.left-box
+            h1 Texto en el costado izquierdo
+            p Texto en el costado izquierdo
+          .text-box.right-box
+            p Texto en el costado derecho
+        // content
+        #contenido
+          h1 Texto contenido h1
+          p Texto contenido p
+        // footer
+        #footer
+          .text-box.left-box
+            h1 Texto en el costado izquierdo
+            p Texto en el costado izquierdo
+          .text-box.right-box
+            p Texto en el costado derecho
+          // Si center-box se pone antes de right-box o left-box queda por encima
+          .text-box.center-box
+            h1 Texto en el costado izquierdo
+            p Texto en el costado izquierdo
