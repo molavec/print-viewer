@@ -4,23 +4,18 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 
-var port = 3000;
-//options
+/************
+pug options
+*************/
 var options = {
   filename: "pug.log",
   pretty: true
 };
 
-
-//for local test
-/*
-var json = {
-  "pageTitle" : "titulo",
-  "content" : "Este es el contenido"
-};
-
-var locals = JSON.parse(JSON.stringify(json));
-*/
+/************
+Express configurations
+*************/
+var port = 3000;
 
 // parse application/json
 app.use(bodyParser.json());
@@ -43,6 +38,13 @@ app.post('/test', function (req, res) {
   // In next routes I prefer to use 'compileFile'.
   var html = pug.renderFile('templates/test.pug', merge(options, locals));
   // reply html
+  res.send(html);
+});
+
+//** Example
+app.get('/A4', function (req, res) {
+  var renderTemplate = pug.compileFile('templates/A4.pug', options);
+  var html = renderTemplate(req.body);
   res.send(html);
 });
 

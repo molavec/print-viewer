@@ -1,31 +1,39 @@
+doctype html
 html
   head
-    link(rel="stylesheet", href="../styles/main.css")
+    link(rel="stylesheet", href="./styles/main.css")
+    title #{page-title}
   body
     page(size='A4')
       .print-container
+
         // header
         #header
           .text-box.center-box
-            h1 Texto en el costado izquierdo
-            p Texto en el costado izquierdo
+            h1 #{title-header-center}
+            p #{subtitle-header-center}
           .text-box.left-box
-            h1 Texto en el costado izquierdo
-            p Texto en el costado izquierdo
+            h1 #{title-header-left}
+            p #{subtitle-header-left}
           .text-box.right-box
-            p Texto en el costado derecho
+            h1 #{title-header-right}
+            p #{subtitle-header-right}
+
         // content
         #contenido
-          h1 Texto contenido h1
-          p Texto contenido p
+          h1 #{title-content}
+          p #{subtitle-content}
+
         // footer
         #footer
           .text-box.left-box
-            h1 Texto en el costado izquierdo
-            p Texto en el costado izquierdo
+            h1 #{title-footer-left}
+            p #{subtitle-footer-left}
           .text-box.right-box
-            p Texto en el costado derecho
-          // Si center-box se pone antes de right-box o left-box queda por encima
+            h1 #{title-footer-right}
+            p #{subtitle-footer-right}
+          // Note: if center-box is behind right-box or left-box it cover them
+          // TODO: fix it in css
           .text-box.center-box
-            h1 Texto en el costado izquierdo
-            p Texto en el costado izquierdo
+            h1 #{title-footer-center}
+            p #{subtitle-footer-center}
