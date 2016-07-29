@@ -1,11 +1,18 @@
 # print-viewer
+
 A service that generate and preview HTML document from template filled
-with JSON
+with JSON.
+
+I use:
+
+ * [Express JS](https://github.com/pugjs/pug)
+ * [Pug](http://expressjs.com/)
 
 ## Install
 Clone project and run npm install
 
     git clone https://github.com/molavec/print-viewer.git
+    cd print-viewer
     npm install
 
 ## Run it
@@ -19,8 +26,14 @@ In dev mode, I suggest use nodemon ('npm install -g nodemon')
 
     nodemon index.js
 
+For see some examples go to http://localhost:3000
+
+
+
 ##Example of use
-Use
+
+Use **curl** to see an example usign POST
+
     curl -H \
     "Content-Type: application/json" \
     -X POST -d \
