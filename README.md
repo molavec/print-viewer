@@ -1,9 +1,9 @@
 # print-viewer
 
-A service that generate and preview HTML document from template filled
+A simple service that generate and preview HTML document from template filled
 with JSON.
 
-I use:
+I used  :
 
  * [Express JS](https://github.com/pugjs/pug)
  * [Pug](http://expressjs.com/)
@@ -19,14 +19,14 @@ Clone project and run npm install
 
 As final service
 
-   node index.js
+    node index.js
 
 
 In dev mode, I suggest use nodemon ('npm install -g nodemon')
 
     nodemon index.js
 
-For see some examples go to http://localhost:3000
+For see some examples go to [http://localhost:3000](http://localhost:3000)
 
 
 
@@ -55,4 +55,5 @@ Use **curl** to see an example usign POST
         , "subtitleFooterCenter" : "This is a center footer example"
         }' \
     http://localhost:3000/A4
+
 
