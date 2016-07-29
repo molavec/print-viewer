@@ -2,38 +2,38 @@ doctype html
 html
   head
     link(rel="stylesheet", href="./styles/main.css")
-    title #{page-title}
+    title #{pageTitle}
   body
     page(size='A4')
-      .print-container
+      .printContainer
 
         // header
         #header
           .text-box.center-box
-            h1 #{title-header-center}
-            p #{subtitle-header-center}
+            h1 #{titleHeaderCenter}
+            p #{subtitleHeaderCenter}
           .text-box.left-box
-            h1 #{title-header-left}
-            p #{subtitle-header-left}
+            h1 #{titleHeaderLeft}
+            p #{subtitleHeaderLeft}
           .text-box.right-box
-            h1 #{title-header-right}
-            p #{subtitle-header-right}
+            h1 #{titleHeaderRight}
+            p #{subtitleHeaderRight}
 
         // content
         #contenido
-          h1 #{title-content}
-          p #{subtitle-content}
+          h1 #{titleContent}
+          p #{subtitleContent}
 
         // footer
         #footer
           .text-box.left-box
-            h1 #{title-footer-left}
-            p #{subtitle-footer-left}
+            h1 #{titleFooterLeft}
+            p #{subtitleFooterLeft}
           .text-box.right-box
-            h1 #{title-footer-right}
-            p #{subtitle-footer-right}
+            h1 #{titleFooterRight}
+            p #{subtitleFooterRight}
           // Note: if center-box is behind right-box or left-box it cover them
           // TODO: fix it in css
           .text-box.center-box
-            h1 #{title-footer-center}
-            p #{subtitle-footer-center}
+            h1 #{titleFooterCenter}
+            p #{subtitleFooterCenter}

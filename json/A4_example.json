@@ -1,0 +1,17 @@
+{
+    "pageTitle": "print-viewer-example"
+  , "titleHeaderCenter" : "This is an example!!"
+  , "subtitleHeaderCenter" : "This is an print viewer example"
+  , "titleHeaderLeft" : "Left Header"
+  , "subtitleHeaderLeft" : "This is a right header example"
+  , "titleHeaderRight" : "Right Header"
+  , "subtitleHeaderRight" : "This is a right header example"
+  , "titleContent" : "content Header"
+  , "subtitleContent" : "This is a content example"
+  , "titleFooterLeft" : "Left footer"
+  , "subtitleFooterLeft" : "Left is a left footer example"
+  , "titleFooterRight" : "Right footer"
+  , "subtitleFooterRight" : "This is a right footer example"
+  , "titleFooterCenter" : "Center footer"
+  , "subtitleFooterCenter" : "This is a center footer example"
+}

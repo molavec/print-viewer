@@ -4,6 +4,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 
+var jsonA4Example = require('./json/A4_example.json');
+
 /************
 pug options
 *************/
@@ -44,7 +46,12 @@ app.post('/test', function (req, res) {
 //** Example
 app.get('/A4', function (req, res) {
   var renderTemplate = pug.compileFile('templates/A4.pug', options);
-  var html = renderTemplate(req.body);
+  var html;
+  if(Object.keys(req.body).length === 0 && req.body.constructor === Object){
+    html = renderTemplate(jsonA4Example);
+  }else{
+    html = renderTemplate(req.body);
+  }
   res.send(html);
 });
 
@@ -52,7 +59,6 @@ app.get('/A4', function (req, res) {
 app.post('/A4', function (req, res) {
   // renderFile
   var renderTemplate = pug.compileFile('templates/A4.pug', options);
-  console.log(req.body);
   var html = renderTemplate(req.body);
   res.send(html);
 });
