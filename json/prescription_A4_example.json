@@ -1,0 +1,15 @@
+{
+    "logoURL": "images/datamed.png"
+  , "nombreProfesional" : "Miguel Olave"
+  , "rutProfesional" : "1231123-6"
+  , "telefonoProfesional" : "+56 9 2131 2123"
+  , "correoProfesional" : "correoprofesional@email.com"
+  , "contenidoReceta" : "Este es el contenido de la receta en html"
+  , "nombreEmpresa" : "Centro Médico Ltda."
+  , "rutEmpresa" : "123123123-6"
+  , "especialidadEmpresa" : "Odontología"
+  , "direccionEmpresa" : "Perico los palotes #12312"
+  , "comunaEmpresa" : "Cumpeo"
+  , "telefonoEmpresa" : "+56 9 3123 1233"
+  , "correoEmpresa" : "correoempresa@email.com"
+}

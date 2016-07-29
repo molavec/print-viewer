@@ -1,0 +1,37 @@
+doctype html
+html
+  head
+    link(rel="stylesheet", href="./styles/medical_prescription_A4.css")
+    title #{pageTitle}
+  body
+    page(size='A4')
+      .printContainer
+
+        // header
+        #header
+          .text-box.left-box
+            img(src=logoURL alt=nombreEmpresa title=nombreEmpresa width="200px")
+          .text-box.right-box
+            h1 #{nombreProfesional}
+            p #{rutProfesional}
+            p #{telefonoProfesional}
+            P #{correoProfesional}
+
+        // content
+        #contenido
+          h1 Receta Médica
+          div #{contenidoReceta}
+
+        // footer
+        #footer
+          .text-box.center-box
+            p
+              |#{nombreEmpresa}
+              | - #{rutEmpresa}
+              | - #{especialidadEmpresa}
+              br
+              |#{direccionEmpresa}
+              | - #{comunaEmpresa}
+              | - #{telefonoEmpresa}
+              | - #{correoEmpresa}
+

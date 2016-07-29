@@ -2,8 +2,24 @@
 A service that generate and preview HTML document from template filled
 with JSON
 
-##Simple Example
+## Install
+Clone project and run npm install
 
+    git clone https://github.com/molavec/print-viewer.git
+    npm install
+
+## Run it
+
+As final service
+
+   node index.js
+
+
+In dev mode, I suggest use nodemon ('npm install -g nodemon')
+
+    nodemon index.js
+
+##Example of use
 Use
     curl -H \
     "Content-Type: application/json" \
