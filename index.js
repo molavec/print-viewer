@@ -43,7 +43,7 @@ app.post('/test', function (req, res) {
   res.send(html);
 });
 
-//** Example
+// ---> A4 example <---
 app.get('/A4', function (req, res) {
   var renderTemplate = pug.compileFile('templates/A4.pug', options);
   var html;
@@ -59,9 +59,16 @@ app.get('/A4', function (req, res) {
 app.post('/A4', function (req, res) {
   // renderFile
   var renderTemplate = pug.compileFile('templates/A4.pug', options);
-  var html = renderTemplate(req.body);
+  var html;
+  if(Object.keys(req.body).length === 0 && req.body.constructor === Object){
+    html = renderTemplate(jsonA4Example);
+  }else{
+    html = renderTemplate(req.body);
+  }
   res.send(html);
 });
+
+
 
 //up server!!
 app.listen(port, function () {
