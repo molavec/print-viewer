@@ -4,8 +4,12 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 
-var jsonA4Example = require('./print_templates/A4/example.json');
-var jsonPrescriptionA4Example = require('./print_templates/prescription_A4/example.json');
+
+var TEMPLATE_FOLDER = 'print_templates'
+  , STD_PUG_FILENAME = 'index.pug'
+  , STD_CSS_FILENAME = 'style.css'
+  , STD_JSON_FILENAME = 'example.json'
+  ;
 
 /************
 pug options
@@ -33,56 +37,53 @@ app.get('/', function (req, res) {
   res.send(html);
 });
 
-// ---> A4 example <---
-app.get('/A4', function (req, res) {
-  var renderTemplate = pug.compileFile('print_templates/A4/index.pug', options);
+
+// Idea inspired by Alexander Zeitler
+// https://alexanderzeitler.com/articles/expressjs-dynamic-runtime-routing/
+app.get('/:dynamicroute/:showexample', function (req, res) {
+
+  //it gets dynamic route
+  var templateName = req.params.dynamicroute;
+
+  var renderHeadTemplate = pug.compile(
+      'doctype html\n'
+    + 'html\n'
+    + ' head\n'
+    + '   link(rel="stylesheet", href="' + STD_CSS_FILENAME + '")\n'
+    + '   title #{pageTitle}\n'
+    ,options
+    );
+
+  //it compiles Jade File based on dynamic route
+  var renderBodyTemplate = pug.compileFile(
+                              TEMPLATE_FOLDER + '/'
+                            + templateName + '/'
+                            + STD_PUG_FILENAME
+                            , options
+                            );
+
+
   var html;
-  if(Object.keys(req.body).length === 0 && req.body.constructor === Object){
-    html = renderTemplate(jsonA4Example);
+  //if activates example mode
+  if(req.params.showexample === '1'){
+    var jsonExample = require(
+                                './'
+                              + TEMPLATE_FOLDER + '/'
+                              + templateName + '/'
+                              + STD_JSON_FILENAME
+                            );
+    html = renderHeadTemplate() + renderBodyTemplate(jsonExample);
+  //if data json object is empty
+  } else if(Object.keys(req.body).length === 0 && req.body.constructor === Object){
+    html = '<h1>Faltan contenido para generar template</h1>';
+  //render template
   }else{
     html = renderTemplate(req.body);
   }
+  //response to client
   res.send(html);
-});
 
-//** A litle more Complex example. Use it or modify it for your work!!. **
-app.post('/A4', function (req, res) {
-  // renderFile
-  var renderTemplate = pug.compileFile('print_templates/A4/index.pug', options);
-  var html;
-  if(Object.keys(req.body).length === 0 && req.body.constructor === Object){
-    html = renderTemplate(jsonA4Example);
-  }else{
-    html = renderTemplate(req.body);
-  }
-  res.send(html);
 });
-
-// ---> A4 prescription <---
-app.get('/prescription_A4', function (req, res) {
-  var renderTemplate = pug.compileFile('print_templates/prescription_A4/index.pug', options);
-  var html;
-  if(Object.keys(req.body).length === 0 && req.body.constructor === Object){
-    html = renderTemplate(jsonPrescriptionA4Example);
-  }else{
-    html = renderTemplate(req.body);
-  }
-  res.send(html);
-});
-
-//** A litle more Complex example. Use it or modify it for your work!!. **
-app.post('/prescription_A4', function (req, res) {
-  // renderFile
-  var renderTemplate = pug.compileFile('print_templates/prescription_A4/index.pug', options);
-  var html;
-  if(Object.keys(req.body).length === 0 && req.body.constructor === Object){
-    html = renderTemplate(jsonPrescriptionA4Example);
-  }else{
-    html = renderTemplate(req.body);
-  }
-  res.send(html);
-});
-
 
 
 //up server!!
