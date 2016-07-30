@@ -4,8 +4,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 
-var jsonA4Example = require('./json/A4_example.json');
-var jsonPrescriptionA4Example = require('./json/prescription_A4_example.json');
+var jsonA4Example = require('./print_templates/A4/example.json');
+var jsonPrescriptionA4Example = require('./print_templates/prescription_A4/example.json');
 
 /************
 pug options
@@ -25,6 +25,7 @@ app.use(bodyParser.json());
 
 //statics files
 app.use(express.static('public'));
+app.use(express.static('print_templates'));
 
 //Main wellcome to service
 app.get('/', function (req, res) {
@@ -34,7 +35,7 @@ app.get('/', function (req, res) {
 
 // ---> A4 example <---
 app.get('/A4', function (req, res) {
-  var renderTemplate = pug.compileFile('templates/A4.pug', options);
+  var renderTemplate = pug.compileFile('print_templates/A4/index.pug', options);
   var html;
   if(Object.keys(req.body).length === 0 && req.body.constructor === Object){
     html = renderTemplate(jsonA4Example);
@@ -47,7 +48,7 @@ app.get('/A4', function (req, res) {
 //** A litle more Complex example. Use it or modify it for your work!!. **
 app.post('/A4', function (req, res) {
   // renderFile
-  var renderTemplate = pug.compileFile('templates/A4.pug', options);
+  var renderTemplate = pug.compileFile('print_templates/A4/index.pug', options);
   var html;
   if(Object.keys(req.body).length === 0 && req.body.constructor === Object){
     html = renderTemplate(jsonA4Example);
@@ -59,7 +60,7 @@ app.post('/A4', function (req, res) {
 
 // ---> A4 prescription <---
 app.get('/prescription_A4', function (req, res) {
-  var renderTemplate = pug.compileFile('templates/medical/prescription_A4.pug', options);
+  var renderTemplate = pug.compileFile('print_templates/prescription_A4/index.pug', options);
   var html;
   if(Object.keys(req.body).length === 0 && req.body.constructor === Object){
     html = renderTemplate(jsonPrescriptionA4Example);
@@ -72,7 +73,7 @@ app.get('/prescription_A4', function (req, res) {
 //** A litle more Complex example. Use it or modify it for your work!!. **
 app.post('/prescription_A4', function (req, res) {
   // renderFile
-  var renderTemplate = pug.compileFile('templates/medical/prescription_A4.pug', options);
+  var renderTemplate = pug.compileFile('print_templates/prescription_A4/index.pug', options);
   var html;
   if(Object.keys(req.body).length === 0 && req.body.constructor === Object){
     html = renderTemplate(jsonPrescriptionA4Example);
