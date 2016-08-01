@@ -1,7 +1,8 @@
 doctype html
 html
   head
-    #link(rel="stylesheet", href="./styles/A4.css")
+    script(src="jquery/dist/jquery.js")
+    script(src="js/index.js")
     title Print Viewer Service
   body
     h1 Print Viewer Service
@@ -11,5 +12,5 @@ html
     ul
       for template in templates
         li
-          a(href='/'+template+'/1') #{template}
-
+          div
+            a(href='/'+template+'/1') #{template}
