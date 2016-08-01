@@ -43,17 +43,6 @@ var templatesJSON = {
   templates: templatesArray
 }
 
-//Main wellcome to service
-app.get('/', function (req, res) {
-  var html = pug.renderFile('templates/index.pug'
-                            , merge(
-                                options,
-                                templatesJSON
-                              )
-                            );
-  res.send(html);
-});
-
 /**
 data - object
 **/
@@ -79,29 +68,42 @@ var renderTemplate = function(templateName, data){
 
 }
 
+//Main wellcome to service
+app.get('/', function (req, res) {
+  var html = pug.renderFile('templates/index.pug'
+                            , merge(
+                                options,
+                                templatesJSON
+                              )
+                            );
+  res.send(html);
+});
+
 // Idea inspired by Alexander Zeitler
 // https://alexanderzeitler.com/articles/expressjs-dynamic-runtime-routing/
-app.get('/:dynamicroute/:showexample', function (req, res) {
-  var html;
+app.get('/:dynamicroute/:command', function (req, res) {
+  var responseContent;
+  //extract data from example.json
+  var exampleDataObject = require(
+                              './'
+                            + TEMPLATE_FOLDER + '/'
+                            + req.params.dynamicroute + '/'
+                            + STD_JSON_FILENAME
+                          );
   //if activates example mode
-  if(req.params.showexample === '1'){
-    //extract data from example.json
-    var exampleDataObject = require(
-                                './'
-                              + TEMPLATE_FOLDER + '/'
-                              + req.params.dynamicroute + '/'
-                              + STD_JSON_FILENAME
-                            );
-    html = renderTemplate(req.params.dynamicroute, exampleDataObject);
-  //if data json object is empty
+  if(req.params.command === 'example'){
+    responseContent = renderTemplate(req.params.dynamicroute, exampleDataObject);
+  //json service
+  } else if(req.params.command === 'example_data.json'){
+    responseContent = exampleDataObject;
   } else if(Object.keys(req.body).length === 0 && req.body.constructor === Object){
-    html = '<h1>Faltan contenido para generar template</h1>';
+    responseContent = '<h1>Faltan contenido para generar template</h1>';
   //render template
   }else{
-    html = renderTemplate(req.params.dynamicroute, req.body);
+    responseContent = renderTemplate(req.params.dynamicroute, req.body);
   }
   //response to client
-  res.send(html);
+  res.send(responseContent);
 
 });
 

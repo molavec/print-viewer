@@ -13,4 +13,7 @@ html
       for template in templates
         li
           div
-            a(href='/'+template+'/1') #{template}
+            a(href='/'+template+'/example') #{template} <br/>
+            textarea(type="text" cols="40" rows="5" template=template)
+            a(href='#' class="post-request" template=template) POST
+
