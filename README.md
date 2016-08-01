@@ -30,7 +30,7 @@ For see some examples go to [http://localhost:3000](http://localhost:3000)
 
 
 
-##Example of use
+##Examples of use
 
 Use **curl** to see an example usign POST
 
@@ -56,4 +56,10 @@ Use **curl** to see an example usign POST
         }' \
     http://localhost:3000/A4
 
+Use **curl** to see an example usign POST without data
+
+    curl -H \
+    "Content-Type: application/json" \
+    -X POST \
+    http://localhost:3000/A4
 
