@@ -2,6 +2,7 @@ var pug = require('pug');
 var merge = require('merge');
 var express = require('express');
 var bodyParser = require('body-parser');
+var fs =  require('fs');
 var app = express();
 
 
@@ -31,9 +32,24 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(express.static('print_templates'));
 
+var templatesArray = fs.readdirSync('print_templates');
+
+templatesArray.forEach(function(current, index){
+  console.log(current);
+});
+
+var templatesJSON = {
+  templates: templatesArray
+}
+
 //Main wellcome to service
 app.get('/', function (req, res) {
-  var html = pug.renderFile('templates/index.pug', options);
+  var html = pug.renderFile('templates/index.pug'
+                            , merge(
+                                options,
+                                templatesJSON
+                              )
+                            );
   res.send(html);
 });
 

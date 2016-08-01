@@ -9,7 +9,7 @@ html
       a(href="https://github.com/molavec/print-viewer") @molavec
     H2 Examples:
     ul
-      li
-        a(href="/A4/1") A4
-      li
-        a(href="/prescription_A4/1") Medical Prescription A4
+      for template in templates
+        li
+          a(href='/'+template+'/1') #{template}
+
