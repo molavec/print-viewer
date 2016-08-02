@@ -3,21 +3,30 @@
   "version": "1.0.0",
   "description": "A service that generate and preview document from template filled with JSON",
   "main": "index.js",
+  "engines": {
+    "node": "6.2.x"
+  },
   "scripts": {
+    "start": "node server.js",
+    "start:dev": "node_modules/nodemon/bin/nodemon.js server.js",
+    "preinstall": "bower install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/molavec/print-viewer.git"
   },
-  "author": "",
+  "author": "Miguel Olave",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/molavec/print-viewer/issues"
   },
   "homepage": "https://github.com/molavec/print-viewer#readme",
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^1.10.0"
+  },
   "dependencies": {
+    "bower": "^1.7.9",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "merge": "^1.2.0",
