@@ -12,8 +12,11 @@ html
     ul
       for template in templates
         li
-          div
+          form
             a(href='/'+template+'/example') #{template} <br/>
-            textarea(type="text" cols="40" rows="5" template=template)
-            a(href='#' class="post-request" template=template) POST
+            //a(href='#' class="post-request" template=template) POST <br/>
+            textarea(cols="40" rows="5" name="json" template=template) <br/>
+            input(type="button" value="POST")
+
+
 

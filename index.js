@@ -35,10 +35,6 @@ app.use(express.static('bower_components'));
 
 var templatesArray = fs.readdirSync('print_templates');
 
-templatesArray.forEach(function(current, index){
-  console.log(current);
-});
-
 var templatesJSON = {
   templates: templatesArray
 }
@@ -51,7 +47,7 @@ var renderTemplate = function(templateName, data){
       'doctype html\n'
     + 'html\n'
     + ' head\n'
-    + '   link(rel="stylesheet", href="' + STD_CSS_FILENAME + '")\n'
+    + '   link(rel="stylesheet", href="/'+templateName+'/' + STD_CSS_FILENAME + '")\n'
     + '   title #{pageTitle}\n'
     ,options
     );
@@ -82,7 +78,7 @@ app.get('/', function (req, res) {
 // Idea inspired by Alexander Zeitler
 // https://alexanderzeitler.com/articles/expressjs-dynamic-runtime-routing/
 app.get('/:dynamicroute/:command', function (req, res) {
-  var responseContent;
+  var html;
   //extract data from example.json
   var exampleDataObject = require(
                               './'
@@ -92,18 +88,18 @@ app.get('/:dynamicroute/:command', function (req, res) {
                           );
   //if activates example mode
   if(req.params.command === 'example'){
-    responseContent = renderTemplate(req.params.dynamicroute, exampleDataObject);
+    html = renderTemplate(req.params.dynamicroute, exampleDataObject);
   //json service
   } else if(req.params.command === 'example_data.json'){
-    responseContent = exampleDataObject;
+    html = exampleDataObject;
   } else if(Object.keys(req.body).length === 0 && req.body.constructor === Object){
-    responseContent = '<h1>Faltan contenido para generar template</h1>';
+    html = '<h1>Faltan contenido para generar template</h1>';
   //render template
   }else{
-    responseContent = renderTemplate(req.params.dynamicroute, req.body);
+    html = renderTemplate(req.params.dynamicroute, req.body);
   }
   //response to client
-  res.send(responseContent);
+  res.send(html);
 
 });
 
@@ -111,6 +107,7 @@ app.get('/:dynamicroute/:command', function (req, res) {
 // https://alexanderzeitler.com/articles/expressjs-dynamic-runtime-routing/
 app.post('/:dynamicroute', function (req, res) {
   var html;
+
   if(Object.keys(req.body).length === 0 && req.body.constructor === Object){
     html = '<h1>Faltan contenido para generar template</h1>';
   //render template
