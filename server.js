@@ -23,7 +23,7 @@ var options = {
 /************
 Express configurations
 *************/
-var port = 3000;
+var port = process.env.PORT || 3000
 
 // parse application/json
 app.use(bodyParser.json());
