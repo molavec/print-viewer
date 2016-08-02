@@ -1,37 +1,32 @@
-doctype html
-html
-  head
-    link(rel="stylesheet", href="style.css")
-    title #{pageTitle}
-  body
-    page(size='A4')
-      .printContainer
+body
+  page(size='A4')
+    .printContainer
 
-        // header
-        #header
-          .text-box.left-box
-            img(src=logoURL alt=nombreEmpresa title=nombreEmpresa width="200px")
-          .text-box.right-box
-            h1 #{nombreProfesional}
-            p #{rutProfesional}
-            p #{telefonoProfesional}
-            P #{correoProfesional}
+      // header
+      #header
+        .text-box.left-box
+          img(src='/prescription_A4/'+logoURL alt=nombreEmpresa title=nombreEmpresa width="200px")
+        .text-box.right-box
+          h1 #{nombreProfesional}
+          p #{rutProfesional}
+          p #{telefonoProfesional}
+          P #{correoProfesional}
 
-        // content
-        #contenido
-          h1 Receta Médica
-          div #{contenidoReceta}
+      // content
+      #contenido
+        h1 Receta Médica
+        div #{contenidoReceta}
 
-        // footer
-        #footer
-          .text-box.center-box
-            p
-              |#{nombreEmpresa}
-              | - #{rutEmpresa}
-              | - #{especialidadEmpresa}
-              br
-              |#{direccionEmpresa}
-              | - #{comunaEmpresa}
-              | - #{telefonoEmpresa}
-              | - #{correoEmpresa}
+      // footer
+      #footer
+        .text-box.center-box
+          p
+            |#{nombreEmpresa}
+            | - #{rutEmpresa}
+            | - #{especialidadEmpresa}
+            br
+            |#{direccionEmpresa}
+            | - #{comunaEmpresa}
+            | - #{telefonoEmpresa}
+            | - #{correoEmpresa}
 

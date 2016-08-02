@@ -35,24 +35,9 @@ app.use(express.static('bower_components'));
 
 var templatesArray = fs.readdirSync('print_templates');
 
-templatesArray.forEach(function(current, index){
-  console.log(current);
-});
-
 var templatesJSON = {
   templates: templatesArray
 }
-
-//Main wellcome to service
-app.get('/', function (req, res) {
-  var html = pug.renderFile('templates/index.pug'
-                            , merge(
-                                options,
-                                templatesJSON
-                              )
-                            );
-  res.send(html);
-});
 
 /**
 data - object
@@ -62,7 +47,7 @@ var renderTemplate = function(templateName, data){
       'doctype html\n'
     + 'html\n'
     + ' head\n'
-    + '   link(rel="stylesheet", href="' + STD_CSS_FILENAME + '")\n'
+    + '   link(rel="stylesheet", href="/'+templateName+'/' + STD_CSS_FILENAME + '")\n'
     + '   title #{pageTitle}\n'
     ,options
     );
@@ -79,21 +64,34 @@ var renderTemplate = function(templateName, data){
 
 }
 
+//Main wellcome to service
+app.get('/', function (req, res) {
+  var html = pug.renderFile('templates/index.pug'
+                            , merge(
+                                options,
+                                templatesJSON
+                              )
+                            );
+  res.send(html);
+});
+
 // Idea inspired by Alexander Zeitler
 // https://alexanderzeitler.com/articles/expressjs-dynamic-runtime-routing/
-app.get('/:dynamicroute/:showexample', function (req, res) {
+app.get('/:dynamicroute/:command', function (req, res) {
   var html;
+  //extract data from example.json
+  var exampleDataObject = require(
+                              './'
+                            + TEMPLATE_FOLDER + '/'
+                            + req.params.dynamicroute + '/'
+                            + STD_JSON_FILENAME
+                          );
   //if activates example mode
-  if(req.params.showexample === '1'){
-    //extract data from example.json
-    var exampleDataObject = require(
-                                './'
-                              + TEMPLATE_FOLDER + '/'
-                              + req.params.dynamicroute + '/'
-                              + STD_JSON_FILENAME
-                            );
+  if(req.params.command === 'example'){
     html = renderTemplate(req.params.dynamicroute, exampleDataObject);
-  //if data json object is empty
+  //json service
+  } else if(req.params.command === 'example_data.json'){
+    html = exampleDataObject;
   } else if(Object.keys(req.body).length === 0 && req.body.constructor === Object){
     html = '<h1>Faltan contenido para generar template</h1>';
   //render template
@@ -109,6 +107,7 @@ app.get('/:dynamicroute/:showexample', function (req, res) {
 // https://alexanderzeitler.com/articles/expressjs-dynamic-runtime-routing/
 app.post('/:dynamicroute', function (req, res) {
   var html;
+
   if(Object.keys(req.body).length === 0 && req.body.constructor === Object){
     html = '<h1>Faltan contenido para generar template</h1>';
   //render template
