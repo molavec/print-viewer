@@ -22,6 +22,7 @@ var options = {
 
 /************
 Express configurations
+NOTE: process.env.PORT is defined by Heroku.
 *************/
 var port = process.env.PORT || 3000
 
